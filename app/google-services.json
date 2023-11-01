@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096684385628",
+    "project_id": "schedultalk",
+    "storage_bucket": "schedultalk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096684385628:android:6249e7eff5c623f00e7d99",
+        "android_client_info": {
+          "package_name": "com.example.schedultalk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1qBpJTaVgPQyx5W53hCmwQGbw2N0k00A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

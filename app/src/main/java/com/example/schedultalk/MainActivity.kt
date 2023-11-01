@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import com.example.schedultalk.databinding.ActivityMainBinding
 import com.example.schedultalk.ui.friends.FrendsListFragment
 import com.example.schedultalk.ui.chats.ChatsListFragment
+import com.example.schedultalk.ui.schedule.CalendarDay
 import com.example.schedultalk.ui.schedule.ScheduleFragment
 
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

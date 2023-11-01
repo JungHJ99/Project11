@@ -4,20 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.schedule.ScheduleFragment">
+    android:minHeight="100dp">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp">
 
-        <FrameLayout
-            android:id="@+id/calendar_fragment"
+        <TextView
+            android:id="@+id/date"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:text="1" />
 
-        </FrameLayout>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/schedules"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
