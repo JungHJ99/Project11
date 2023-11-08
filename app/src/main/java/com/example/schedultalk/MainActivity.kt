@@ -2,12 +2,18 @@ package com.example.schedultalk
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.schedultalk.databinding.ActivityMainBinding
 import com.example.schedultalk.ui.friends.FrendsListFragment
 import com.example.schedultalk.ui.chats.ChatsListFragment
 import com.example.schedultalk.ui.schedule.CalendarDay
+import com.example.schedultalk.ui.schedule.CalendarDaySchedule
 import com.example.schedultalk.ui.schedule.ScheduleFragment
+import com.example.schedultalk.viewmodel.ScheduleViewModel
+import androidx.fragment.app.activityViewModels
 
 
 class MainActivity : AppCompatActivity() {

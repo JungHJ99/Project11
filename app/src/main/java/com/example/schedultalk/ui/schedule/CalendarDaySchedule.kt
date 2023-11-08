@@ -1,7 +1,8 @@
 package com.example.schedultalk.ui.schedule
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-import java.time.LocalDate
-
+@Parcelize
 data class CalendarDaySchedule(
     var color: String? = null,
     var endDate: String? = null,
@@ -10,8 +11,8 @@ data class CalendarDaySchedule(
     var private: Boolean = false,
     var startDate: String? = null,
     var title: String? = null,
-    var userId: Int = 0
-    )
+    var createdBy: String? = null
+    ): Parcelable{}
 
 data class CalendarDaySchedules(
     var schedules: ArrayList<CalendarDaySchedule>? = null

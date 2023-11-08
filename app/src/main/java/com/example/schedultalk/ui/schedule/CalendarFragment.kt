@@ -2,6 +2,7 @@ package com.example.schedultalk.ui.schedule
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +17,8 @@ import java.time.LocalDate
 
 class CalendarFragment : Fragment() {
 
-    var calendar_day_schedule : ArrayList<CalendarDaySchedule>? = arrayListOf()
-
-    val viewModel: ScheduleViewModel by activityViewModels()
     var binding: FragmentCalendarBinding? = null
+    var calendar_day_schedules : ArrayList<CalendarDaySchedule>? = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -30,10 +29,9 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCalendarBinding.inflate(inflater)
-
         // 스케줄 가져오기
-        viewModel.retrieveSchedules()
-        calendar_day_schedule = viewModel.schedules.value
+        calendar_day_schedules = arguments?.getParcelableArrayList("calendar_day_schedules")
+        Log.v("log3", calendar_day_schedules.toString())
 
         // 선택한 달의 날짜 리스트
         var calendar_days = ArrayList<CalendarDay>()
@@ -48,6 +46,7 @@ class CalendarFragment : Fragment() {
             val first_date_day = first_date.dayOfWeek.value % 7
             // 마지막 날짜
             val last_date = selected_date.lengthOfMonth()
+            Log.v("log4", calendar_day_schedules.toString())
 
             // calendar_days에 날짜 넣어주기
             for(i in 1..41){
@@ -57,7 +56,7 @@ class CalendarFragment : Fragment() {
                     calendar_days.add(
                         CalendarDay(
                             (i - first_date_day).toString(),
-                            calendar_day_schedule ?: arrayListOf<CalendarDaySchedule>()))
+                            calendar_day_schedules ?: arrayListOf<CalendarDaySchedule>()))
                 }
             }
         }
@@ -96,19 +95,12 @@ class CalendarFragment : Fragment() {
         return binding?.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.schedules.observe(viewLifecycleOwner){
-        }
-    }
-
     companion object {
         @JvmStatic
-        fun newInstance(me: String) =
+        fun newInstance(calendar_day_schedules: ArrayList<CalendarDaySchedule>?) =
             CalendarFragment().apply {
                 arguments = Bundle().apply {
-                    putString("me", me)
+                    putParcelableArrayList("calendar_day_schedules", calendar_day_schedules)
                 }
             }
     }
