@@ -26,28 +26,18 @@ class ScheduleFragment : Fragment() {
         // 스케줄데이터 Firbase로부터 가져오기
         viewModel.schedules.observe(viewLifecycleOwner){ schedules ->
             calendar_day_schedules = schedules
-            Log.v("log2", calendar_day_schedules.toString())
 
             // CalendarFragment 불러오기
-            loadCalendarFragment(calendar_day_schedules, binding)
-            Log.v("log5", calendar_day_schedules.toString())
-        }
-        return binding.root
-    }
-
-    private fun loadCalendarFragment(schedules: ArrayList<CalendarDaySchedule>?, binding: FragmentScheduleBinding) {
-        // 이제 이 메서드는 스케줄 데이터가 준비되었을 때만 호출됩니다.
-        if (isAdded) { // Fragment가 여전히 액티비티에 추가되어 있는지 확인
             parentFragmentManager.beginTransaction().apply {
                 replace(binding.calendarFragment.id, CalendarFragment.newInstance(schedules))
                 commit()
             }
         }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.v("log6", calendar_day_schedules.toString())
     }
 
     companion object {

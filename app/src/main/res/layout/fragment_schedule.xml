@@ -12,6 +12,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="일정 관리"
+            android:textSize="20sp" />
+
         <FrameLayout
             android:id="@+id/calendar_fragment"
             android:layout_width="match_parent"

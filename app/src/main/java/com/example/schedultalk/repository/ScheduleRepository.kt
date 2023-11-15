@@ -41,20 +41,24 @@ class ScheduleRepository {
                 val userScheduleIds = ArrayList<String>()
 
                 // 스케줄 ID 목록 추출
+                // snapshot은 선택된 user가 갖고 있는 schedules(id 형태)의 배열
                 snapshot.children.forEach { child ->
                     child.key?.let { key ->
-                        if (child.getValue(Boolean::class.java) == true) {
+                        if (child.value == true) {
                             userScheduleIds.add(key)
                         }
                     }
                 }
+                // Tasks.whenAllComplete를 통한 비동기작업에 사용
                 val tasks = ArrayList<Task<DataSnapshot>>()
                 val userSchedules = ArrayList<CalendarDaySchedule>()
 
                 userScheduleIds.forEach { scheduleId ->
+                    // Task 객체: Firebase SDK에서 제공하는 비동기 작업을 나타내는 객체
                     val task = scheduleRef.child(scheduleId).get()
                     tasks.add(task)
                     task.addOnSuccessListener { dataSnapshot ->
+                        // DataSnapshot 객체를 CalendarDaySchedule로 변환하여 저장
                         val schedule = dataSnapshot.getValue(CalendarDaySchedule::class.java)
                         if(schedule != null) {
                             userSchedules.add(schedule)
@@ -62,9 +66,8 @@ class ScheduleRepository {
                     }
                 }
 
-                // Wait for all tasks to complete
+                // tasks 리스트가 가리키는 Task 객체들이 모두 완료되었을 때 실행
                 Tasks.whenAllComplete(tasks).addOnCompleteListener {
-                    // All tasks are complete, post the value
                     schedulesData.postValue(userSchedules)
                 }
             }

@@ -1,6 +1,8 @@
 package com.example.schedultalk.ui.schedule
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +15,8 @@ class CalendarDayScheduleAdapter(val schedules: ArrayList<CalendarDaySchedule>) 
 
     // 화면 설정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val binding = ItemScheduleBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemScheduleBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false)
         return Holder(binding, parent.context)
     }
 
@@ -28,6 +31,8 @@ class CalendarDayScheduleAdapter(val schedules: ArrayList<CalendarDaySchedule>) 
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(calendarDaySchedule: CalendarDaySchedule) {
             binding.scheduleTitle.text = calendarDaySchedule.title
+            val color = Color.parseColor(calendarDaySchedule.color)
+            binding.scheduleChip.background = ColorDrawable(color)
         }
     }
 }

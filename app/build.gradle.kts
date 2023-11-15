@@ -44,6 +44,7 @@ dependencies {
 
     implementation("androidx.fragment:fragment-ktx:1.6.1") // 이거 반드시 추가해주기
     implementation("androidx.activity:activity-ktx:1.6.1") // 이것도
+    implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.core:core-ktx:1.9.0")
