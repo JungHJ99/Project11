@@ -7,13 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
+import com.example.schedultalk.databinding.FragmentCalendarBinding
 import com.example.schedultalk.databinding.FragmentScheduleBinding
 import com.example.schedultalk.viewmodel.ScheduleViewModel
 
 class ScheduleFragment : Fragment() {
-    val viewModel: ScheduleViewModel by activityViewModels()
-    var calendar_day_schedules : ArrayList<CalendarDaySchedule>? = arrayListOf()
-    val userId = "user1"
+    private val viewModel: ScheduleViewModel by activityViewModels()
+    private var calendar_day_schedules : ArrayList<CalendarDaySchedule>? = arrayListOf()
+    private val userId = "user1"
+    private var binding: FragmentScheduleBinding? = null
+    private var is_posting_page_opened = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.setUserId(userId)
@@ -23,7 +27,7 @@ class ScheduleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
         // 스케줄데이터 Firbase로부터 가져오기
         viewModel.schedules.observe(viewLifecycleOwner){ schedules ->
@@ -31,15 +35,43 @@ class ScheduleFragment : Fragment() {
 
             // CalendarFragment 불러오기
             parentFragmentManager.beginTransaction().apply {
-                replace(binding.calendarFragment.id, CalendarFragment.newInstance(schedules))
+                binding?.calendarFragment?.id?.let {
+                    replace(it, CalendarFragment.newInstance(schedules)) }
                 commit()
             }
         }
 
-        binding.addScheduleBtn.setOnClickListener(){
-            Log.v("gg", "gg")
+        // 스케줄 추가하기
+        binding?.addBtn?.setOnClickListener {
+            val postedSchedule = CalendarDaySchedule(
+                                    binding?.editTitle?.text.toString(),
+                                    binding?.editStartDate?.text.toString(),
+                                    binding?.editEndDate?.text.toString(),
+                                    binding?.editPlace?.text.toString(),
+                                    binding?.editMemo?.text.toString(),
+                                    binding?.editColor?.text.toString(),
+                //Boolean 스마트캐스트 방법
+                                    binding?.editPrivate!!.isChecked,
+                                    userId
+            )
+            postedSchedule.let {
+                viewModel.postSchedule(it)
+            }
         }
-        return binding.root
+
+        binding?.postingPage?.visibility = View.GONE
+        binding?.addScheduleBtn?.setOnClickListener(){
+            Log.v("gg", is_posting_page_opened.toString())
+            if(is_posting_page_opened){
+                binding?.postingPage?.visibility = View.GONE
+                is_posting_page_opened = false
+            } else {
+                binding?.postingPage?.visibility = View.VISIBLE
+                is_posting_page_opened = true
+            }
+//            is_posting_page_opened != is_posting_page_opened
+        }
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

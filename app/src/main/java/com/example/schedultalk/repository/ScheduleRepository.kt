@@ -35,8 +35,8 @@ class ScheduleRepository {
 
     fun getUserSchedules(userId: String,
                          schedulesData: MutableLiveData<ArrayList<CalendarDaySchedule>?>) {
-        Log.v("log1", "hh")
-        usersRef.child(userId).child("schedules").addListenerForSingleValueEvent(object : ValueEventListener {
+        usersRef.child(userId).child("schedules").addValueEventListener(
+            object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // 스케줄 목록을 저장할 리스트 초기화
                 val userScheduleIds = ArrayList<String>()
@@ -77,5 +77,14 @@ class ScheduleRepository {
                 // 데이터 가져오기를 실패했거나 취소되었을 때 콜백을 호출합니다.
             }
         })
+    }
+
+    fun postSchedule(scheduleValue: CalendarDaySchedule){
+        val newScheduleRef = scheduleRef.push()
+        newScheduleRef.setValue(scheduleValue)
+        val newUserScheduleRef = usersRef.child(scheduleValue.createdBy.toString())
+            .child("schedules")
+            .child(newScheduleRef.key!!)
+            .setValue(true)
     }
 }

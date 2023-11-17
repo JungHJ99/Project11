@@ -20,6 +20,10 @@ class ScheduleViewModel: ViewModel() {
         _userId = userId
         repository.getUserSchedules(_userId, _schedules) // Update schedules with the new userId
     }
+
+    fun postSchedule(schedule: CalendarDaySchedule){
+        repository.postSchedule(schedule)
+    }
 //        fun addSchedule(data: CalendarDaySchedule){
 //
 //        }
