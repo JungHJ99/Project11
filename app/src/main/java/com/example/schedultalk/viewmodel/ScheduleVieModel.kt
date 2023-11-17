@@ -11,11 +11,14 @@ import kotlinx.coroutines.launch
 
 class ScheduleViewModel: ViewModel() {
     private val _schedules = MutableLiveData<ArrayList<CalendarDaySchedule>?>()
+    private lateinit var _userId : String
     val schedules : LiveData<ArrayList<CalendarDaySchedule>?> get() = _schedules
 
     private val repository = ScheduleRepository()
-    init{
-        repository.getUserSchedules("user1", _schedules) //레포지토리를 사용하여 데이터베이스에서 값 가져옴
+
+    fun setUserId(userId: String) {
+        _userId = userId
+        repository.getUserSchedules(_userId, _schedules) // Update schedules with the new userId
     }
 //        fun addSchedule(data: CalendarDaySchedule){
 //

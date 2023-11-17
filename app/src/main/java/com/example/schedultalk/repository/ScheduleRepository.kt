@@ -33,7 +33,8 @@ class ScheduleRepository {
         })
     }
 
-    fun getUserSchedules(userId: String, schedulesData: MutableLiveData<ArrayList<CalendarDaySchedule>?>) {
+    fun getUserSchedules(userId: String,
+                         schedulesData: MutableLiveData<ArrayList<CalendarDaySchedule>?>) {
         Log.v("log1", "hh")
         usersRef.child(userId).child("schedules").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

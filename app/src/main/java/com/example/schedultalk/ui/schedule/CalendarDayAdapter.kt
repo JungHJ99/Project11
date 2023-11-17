@@ -18,7 +18,7 @@ class CalendarDayAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ItemCalendarBinding.inflate(
             LayoutInflater.from(parent.context), parent, false)
-        return Holder(binding, parent.context)
+        return Holder(binding, parent.context, onItemClickListener)
     }
 
     // 외부에서 클릭 시 이벤트 설정
@@ -27,28 +27,31 @@ class CalendarDayAdapter(
     }
     // setItemClickListener로 설정한 함수 실행
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
-        itemClickListener = onItemClickListener
+        this.onItemClickListener = onItemClickListener
     }
     // 데이터 설정
-    private lateinit var itemClickListener : OnItemClickListener
+    lateinit var onItemClickListener : OnItemClickListener
 
     override fun getItemCount() = calendarDays.size
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(calendarDays[position])
         holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, calendarDays[position])
+            onItemClickListener.onClick(it, calendarDays[position])
         }
     }
 
-    class Holder(val binding: ItemCalendarBinding, val context: Context)
+    class Holder(val binding: ItemCalendarBinding,
+                 val context: Context,
+                 val onItemClickListner: OnItemClickListener)
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(calendarDay: CalendarDay) {
             binding.date.text = calendarDay.date.toString()
             // 스케줄 recyclerView
             binding.schedules.layoutManager= LinearLayoutManager(
                 context, LinearLayoutManager.VERTICAL, false)
-            binding.schedules.adapter = CalendarDayScheduleAdapter(calendarDay.scheduleList)
+            binding.schedules.adapter =
+                CalendarDayScheduleAdapter(calendarDay, onItemClickListner)
         }
     }
 }

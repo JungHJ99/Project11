@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schedultalk.databinding.ItemCalendarBinding
 import com.example.schedultalk.databinding.ItemScheduleBinding
 
-class CalendarDayScheduleAdapter(val schedules: ArrayList<CalendarDaySchedule>) :
+class CalendarDayScheduleAdapter(
+//    val schedules: ArrayList<CalendarDaySchedule>,
+    val calendarDay: CalendarDay,
+    val onItemClickListener: CalendarDayAdapter.OnItemClickListener) :
     RecyclerView.Adapter<CalendarDayScheduleAdapter.Holder>() {
 
     // 화면 설정
@@ -20,11 +23,14 @@ class CalendarDayScheduleAdapter(val schedules: ArrayList<CalendarDaySchedule>) 
         return Holder(binding, parent.context)
     }
 
-    override fun getItemCount() = schedules.size
+    override fun getItemCount() = calendarDay.scheduleList.size
 
     // 데이터 설정
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(schedules[position])
+        holder.bind(calendarDay.scheduleList[position])
+        holder.itemView.setOnClickListener {
+            onItemClickListener.onClick(it, calendarDay)
+        }
     }
 
     class Holder(val binding: ItemScheduleBinding, val context: Context)

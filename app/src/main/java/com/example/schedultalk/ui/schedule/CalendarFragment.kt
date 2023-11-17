@@ -41,10 +41,6 @@ class CalendarFragment : Fragment() {
         // 선택한 날짜를 현재로 설정
         selectedDate = LocalDate.now()
 
-        binding?.textMonth?.setOnClickListener{
-            setMonthView(selectedDate)
-        }
-
         // 화면 설정
         if (!isDayView) {
             setMonthView(selectedDate)
@@ -73,6 +69,10 @@ class CalendarFragment : Fragment() {
                 selectedDate = selectedDate.plusDays(1)
                 setDayView(selectedDate)
             }
+        }
+
+        binding?.calendarBack?.setOnClickListener {
+            setMonthView(selectedDate)
         }
 
         return binding?.root
@@ -150,6 +150,8 @@ class CalendarFragment : Fragment() {
                 }
             }
         })
+
+        binding?.calendarBack?.visibility = View.GONE
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -161,6 +163,7 @@ class CalendarFragment : Fragment() {
 
         binding?.calendar?.layoutManager = LinearLayoutManager(this.context)
         binding?.calendar?.adapter = CalendarTimeScheduleAdapter(getDaySchedules(currentDate))
+        binding?.calendarBack?.visibility = View.VISIBLE
     }
 
     companion object {

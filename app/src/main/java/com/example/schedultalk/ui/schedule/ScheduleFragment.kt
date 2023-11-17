@@ -13,8 +13,10 @@ import com.example.schedultalk.viewmodel.ScheduleViewModel
 class ScheduleFragment : Fragment() {
     val viewModel: ScheduleViewModel by activityViewModels()
     var calendar_day_schedules : ArrayList<CalendarDaySchedule>? = arrayListOf()
+    val userId = "user1"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.setUserId(userId)
     }
 
     override fun onCreateView(
@@ -32,6 +34,10 @@ class ScheduleFragment : Fragment() {
                 replace(binding.calendarFragment.id, CalendarFragment.newInstance(schedules))
                 commit()
             }
+        }
+
+        binding.addScheduleBtn.setOnClickListener(){
+            Log.v("gg", "gg")
         }
         return binding.root
     }

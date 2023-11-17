@@ -60,9 +60,8 @@ class CalendarTimeScheduleAdapter(private val calendarDaySchedules: ArrayList<Ca
                     "${endDateTime.monthValue}월 ${endDateTime.dayOfMonth}일 " +
                             "${endDateTime.hour}:${zeroAdder(endDateTime.minute)}"
 
-
                 binding.schedulePlace.text = calendarDaySchedule.place
-                binding.scheduleMemo.text = calendarDaySchedule.memo
+                binding.scheduleMemo.text = "* ${calendarDaySchedule.memo}"
             }
         }
     }
