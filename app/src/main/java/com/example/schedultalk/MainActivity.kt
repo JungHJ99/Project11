@@ -2,25 +2,27 @@ package com.example.schedultalk
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.schedultalk.databinding.ActivityMainBinding
 import com.example.schedultalk.ui.friends.FrendsListFragment
 import com.example.schedultalk.ui.chats.ChatsListFragment
-import com.example.schedultalk.ui.schedule.CalendarDay
-import com.example.schedultalk.ui.schedule.CalendarDaySchedule
 import com.example.schedultalk.ui.schedule.ScheduleFragment
-import com.example.schedultalk.viewmodel.ScheduleViewModel
-import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.schedultalk.ui.friends.FriendsAdapter
 
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        var binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //binding.friends_rv.layoutManager = LinearLayoutManager(this)
+        //binding.friends_rv.adapter = FriendsAdapter(friends)
+
 
         // Fragment를 바꾸는 함수
         fun replacFragment(frag: Fragment) {
