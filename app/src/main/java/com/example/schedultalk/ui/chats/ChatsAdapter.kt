@@ -20,20 +20,17 @@ class ChatsAdapter(val chats: Array<Chat>) :
         holder.bind(chats[position])
     }
 
-    class Holder(private val binding: ItemChatsListBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(chat: Chat) {
-            binding.imageView.setImageResource(
-                when (chat.user) {
-                    EUser.Heesu -> R.drawable.heesu
-                    EUser.Seunghwan -> R.drawable.seunghwan
-                    EUser.Haejin -> R.drawable.haejin
-                }
-            )
+    class Holder(private val binding: ItemChatsListBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(chat: Chat){
+            binding.imageView.setImageResource( when( chat.user ){
+                EUser.Heesu -> R.drawable.heesu
+                EUser.Seunghwan -> R.drawable.seunghwan
+                EUser.Haejin -> R.drawable.haejin
+            })
             binding.txtName.text = chat.name
             binding.txtContent.text = chat.content
             binding.txtTime.text = chat.time
+
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.schedultalk.ui.chats
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +30,12 @@ class ChatsListFragment : Fragment() {
         this.binding.recChats.layoutManager = LinearLayoutManager(requireContext())
         this.binding.recChats.adapter = ChatsAdapter(chats)
 
+        Log.v("tt", "tt")
+
         return view
     }
+
+
 
     companion object {
         @JvmStatic
