@@ -7,6 +7,7 @@
     tools:context=".ui.friends.FrendsListFragment" >
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -15,29 +16,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@android:color/darker_gray">
+            android:background="#D8D8D8"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="150dp"
                 android:layout_height="72dp"
+                android:layout_marginTop="8dp"
                 android:padding="10dp"
                 android:text="친구 목록"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <SearchView
-                android:layout_width="182dp"
-                android:layout_height="match_parent" >
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                app:iconifiedByDefault="false"
+                app:queryHint = "친구 검색"
+                app:queryBackground="@android:color/transparent"
+                >
 
-            </SearchView>
+            </androidx.appcompat.widget.SearchView>
 
             <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@android:drawable/ic_input_add" />
+                android:id="@+id/imageButton"
+                android:layout_width="62dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/add_friend" />
 
         </LinearLayout>
 
@@ -47,8 +57,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friends_rv"
         android:layout_width="match_parent"
-        android:layout_height="657dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="73dp" />
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

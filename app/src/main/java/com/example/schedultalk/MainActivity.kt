@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
         var binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //binding.friends_rv.layoutManager = LinearLayoutManager(this)
-        //binding.friends_rv.adapter = FriendsAdapter(friends)
 
 
         // Fragment를 바꾸는 함수
